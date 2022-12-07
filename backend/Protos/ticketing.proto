@@ -8,11 +8,18 @@ service TicketingService {
   rpc AddConcert(Concert) returns (Concert) {}
   rpc UpdateConcert(Concert) returns (Concert) {}
   rpc DeleteConcert(ConcertId) returns (Concert) {}
-  rpc GetAllConcerts() returns (Concerts) {}
+  rpc GetAllConcerts(GetAllConcertsRequest) returns (Concerts) {}
   rpc AddReservation(Reservation) returns (Reservation) {}
   rpc UpdateReservation(Reservation) returns (Reservation) {}
   rpc DeleteReservation(ReservationId) returns (Reservation) {}
-  rpc GetAllReservations() returns (Reservations) {}
+  rpc GetAllReservations(GetAllReservationsRequest) returns (Reservations) {}
+}
+
+
+message GetAllConcertsRequest {
+}
+
+message GetAllReservationsRequest {
 }
 
 message Concert {
@@ -26,7 +33,7 @@ message Reservation {
   string date = 2;
   string email = 3;
   string payment_method = 4;
-  decimal price = 5;
+  double price = 5;
   int32 concert_id = 6;
   Concert concert = 7;
 }

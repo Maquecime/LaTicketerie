@@ -1,4 +1,6 @@
-﻿public class Reservation
+﻿using System;
+
+public class Reservation
 {
     public int Id { get; set; }
     public DateTime Date { get; set; }
