@@ -4,6 +4,8 @@ WORKDIR /App
 # Copy everything
 COPY . ./
 
+COPY ../shared/*.csproj ../shared
+
 # Restore as distinct layers
 RUN dotnet restore
 # Build and publish a release

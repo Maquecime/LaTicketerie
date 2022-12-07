@@ -36,6 +36,7 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+    app.UseHsts();
 }
 
 app.UseStaticFiles();
@@ -45,7 +46,6 @@ app.UseRouting();
 app.UseAuthorization();
 
 app.MapGrpcService<TicketingService>();
-app.MapGrpcService<TicketingInMemoryService>();
 app.MapControllers();
 
 

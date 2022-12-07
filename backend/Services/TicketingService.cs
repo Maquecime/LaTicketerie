@@ -1,4 +1,5 @@
 using Grpc.Core;
+using shared.Protos;
 
 namespace backend.Services
 {
@@ -11,9 +12,16 @@ namespace backend.Services
             _repo = repo;
         }
 
-        public override Task<shared.Protos.Concert> AddConcert(shared.Protos.Concert request, ServerCallContext context)
+        public async override Task<shared.Protos.Concert> AddConcert(Concert request, ServerCallContext context)
         {
-            throw new NotImplementedException();
+            var concert = new shared.Model.Concert()
+            {
+                Date = DateTime.Parse(request.Date),
+                Name = request.Name
+            };
+
+            await _repo.AddConcert(concert);
+            return request;
         }
 
         public override Task<shared.Protos.Reservation> AddReservation(shared.Protos.Reservation request, ServerCallContext context)
