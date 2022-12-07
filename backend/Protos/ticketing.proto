@@ -1,0 +1,48 @@
+syntax = "proto3";
+
+option csharp_namespace = "backend.Protos";
+
+package ticketing_service;
+
+service TicketingService {
+  rpc AddConcert(Concert) returns (Concert) {}
+  rpc UpdateConcert(Concert) returns (Concert) {}
+  rpc DeleteConcert(ConcertId) returns (Concert) {}
+  rpc GetAllConcerts() returns (Concerts) {}
+  rpc AddReservation(Reservation) returns (Reservation) {}
+  rpc UpdateReservation(Reservation) returns (Reservation) {}
+  rpc DeleteReservation(ReservationId) returns (Reservation) {}
+  rpc GetAllReservations() returns (Reservations) {}
+}
+
+message Concert {
+  int32 id = 1;
+  string name = 2;
+  string date = 3;
+}
+
+message Reservation {
+  int32 id = 1;
+  string date = 2;
+  string email = 3;
+  string payment_method = 4;
+  decimal price = 5;
+  int32 concert_id = 6;
+  Concert concert = 7;
+}
+
+message ConcertId {
+  int32 id = 1;
+}
+
+message ReservationId {
+  int32 id = 1;
+}
+
+message Concerts {
+  repeated Concert concert = 1;
+}
+
+message Reservations {
+  repeated Reservation reservation = 1;
+}

@@ -1,1 +1,32 @@
+version: '3.7'
 
+services:
+  backend:
+    container_name: backend
+    image: backend
+    build:
+      context: ${ROOT_PROJ_FOLDER}/${BACKEND_FOLDER}
+    ports:
+      - "${PORT_BACKEND}:${PORT_BACKEND}"
+    environment:
+      ASPNETCORE_ENVIRONMENT: "Development"
+      ASPNETCORE_URLS: "http://+:${PORT_BACKEND}"
+
+  webapp:
+    container_name: webapp
+    image: webapp
+    build:
+      context: ${ROOT_PROJ_FOLDER}/${WEBAPP_FOLDER}
+    ports:
+      - "${PORT_WEBAPP}:${PORT_WEBAPP}"
+    environment:
+      ASPNETCORE_ENVIRONMENT: "Development"
+      ASPNETCORE_URLS: "http://+:${PORT_WEBAPP}"
+
+  worker:
+    container_name: worker
+    image: worker
+    build:
+      context: ${ROOT_PROJ_FOLDER}/${WORKER_FOLDER}
+    environment:
+      ASPNETCORE_ENVIRONMENT: "Development"
