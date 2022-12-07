@@ -1,5 +1,3 @@
-using Grpc.Net.Client;
-using static shared.Protos.TicketingService;
 using shared.Protos;
 using backend.Services;
 
@@ -7,31 +5,27 @@ namespace concert_service.Tests
 {
     public class TicketingServiceTest
     {
-        private GrpcChannel _channel;
-        private TicketingServiceClient _client;
-
-        private TicketingInMemoryService _service;
+        private TicketingInMemoryService _mockRepo;
+        private backend.Services.TicketingService _service;
 
         [SetUp]
         public void SetUp()
         {
-
-            _channel = GrpcChannel.ForAddress("http://localhost:5293");
-            _client = new TicketingServiceClient(_channel);
-            _service = new TicketingInMemoryService();
+            _mockRepo = new TicketingInMemoryService();
+            _service = new backend.Services.TicketingService(_mockRepo);
         }
 
         [Test]
         public async Task AddConcert_ShouldAddConcert()
         {
 
-            var concert = new shared.Model.Concert
+            Concert concert = new shared.Protos.Concert
             {
                 Name = "Test Concert",
-                Date = DateTime.Now
+                Date = DateTime.Now.ToString()
             };
 
-            var addedConcert = await _service.AddConcert(concert);
+            var addedConcert = await _service.AddConcert(concert, null);
 
             Assert.That(addedConcert.Name, Is.EqualTo("Test Concert"));
         }
