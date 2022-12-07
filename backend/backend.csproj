@@ -22,8 +22,4 @@
     <ProjectReference Include="..\shared\shared.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-  <Protobuf Include="Protos\ticketing.proto" GrpcServices="Server" />
-  </ItemGroup>
-
 </Project>

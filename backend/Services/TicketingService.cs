@@ -1,9 +1,8 @@
-using backend.Protos;
 using Grpc.Core;
 
 namespace backend.Services
 {
-    public class TicketingService : backend.Protos.TicketingService.TicketingServiceBase
+    public class TicketingService : shared.Protos.TicketingService.TicketingServiceBase
     {
         private readonly ITicketingRepository _repo;
 
@@ -12,22 +11,22 @@ namespace backend.Services
             _repo = repo;
         }
 
-        public override Task<Protos.Concert> AddConcert(Protos.Concert request, ServerCallContext context)
+        public override Task<shared.Protos.Concert> AddConcert(shared.Protos.Concert request, ServerCallContext context)
         {
             throw new NotImplementedException();
         }
 
-        public override Task<Protos.Reservation> AddReservation(Protos.Reservation request, ServerCallContext context)
+        public override Task<shared.Protos.Reservation> AddReservation(shared.Protos.Reservation request, ServerCallContext context)
         {
             throw new NotImplementedException();
         }
 
-        public override Task<Protos.Concert> DeleteConcert(ConcertId request, ServerCallContext context)
+        public override Task<shared.Protos.Concert> DeleteConcert(shared.Protos.ConcertId request, ServerCallContext context)
         {
             throw new NotImplementedException();
         }
 
-        public override Task<Protos.Reservation> DeleteReservation(ReservationId request, ServerCallContext context)
+        public override Task<shared.Protos.Reservation> DeleteReservation(shared.Protos.ReservationId request, ServerCallContext context)
         {
             throw new NotImplementedException();
         }
@@ -37,22 +36,22 @@ namespace backend.Services
             throw new NotImplementedException();
         }
 
-        public override Task<Concerts> GetAllConcerts(GetAllConcertsRequest request, ServerCallContext context)
+        public override Task<shared.Protos.Concerts> GetAllConcerts(shared.Protos.GetAllConcertsRequest request, ServerCallContext context)
         {
             throw new NotImplementedException();
         }
 
-        public override Task<Reservations> GetAllReservations(GetAllReservationsRequest request, ServerCallContext context)
+        public override Task<shared.Protos.Reservations> GetAllReservations(shared.Protos.GetAllReservationsRequest request, ServerCallContext context)
         {
             throw new NotImplementedException();
         }
 
-        public override Task<Protos.Concert> UpdateConcert(Protos.Concert request, ServerCallContext context)
+        public override Task<shared.Protos.Concert> UpdateConcert(shared.Protos.Concert request, ServerCallContext context)
         {
             throw new NotImplementedException();
         }
 
-        public override Task<Protos.Reservation> UpdateReservation(Protos.Reservation request, ServerCallContext context)
+        public override Task<shared.Protos.Reservation> UpdateReservation(shared.Protos.Reservation request, ServerCallContext context)
         {
             throw new NotImplementedException();
         }

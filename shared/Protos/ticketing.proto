@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-option csharp_namespace = "backend.Protos";
+option csharp_namespace = "shared.Protos";
 
 package ticketing_service;
 

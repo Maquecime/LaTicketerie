@@ -2,6 +2,7 @@ namespace backend.Controllers
 {
     using backend.Services;
     using Microsoft.AspNetCore.Mvc;
+    using shared;
 
     [Route("api/[controller]")]
     [ApiController]

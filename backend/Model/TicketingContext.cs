@@ -1,5 +1,6 @@
 
 using Microsoft.EntityFrameworkCore;
+using shared;
 
 public class TicketingContext : DbContext
 {

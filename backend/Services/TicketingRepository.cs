@@ -1,4 +1,5 @@
 using backend.Services;
+using shared;
 
 public class TicketingRepository : ITicketingRepository
 {

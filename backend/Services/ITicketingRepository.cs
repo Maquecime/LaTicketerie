@@ -1,3 +1,4 @@
+using shared;
 
 namespace backend.Services
 {

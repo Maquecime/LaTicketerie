@@ -1,5 +1,6 @@
 ﻿using System;
 
+namespace shared;
 public class Reservation
 {
     public int Id { get; set; }
