@@ -1,3 +1,4 @@
+using backend.Model;
 using backend.Services;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.EntityFrameworkCore;
@@ -44,6 +45,7 @@ app.UseRouting();
 app.UseAuthorization();
 
 app.MapGrpcService<TicketingService>();
+app.MapGrpcService<TicketingInMemoryService>();
 app.MapControllers();
 
 

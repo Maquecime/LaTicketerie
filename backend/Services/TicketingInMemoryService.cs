@@ -1,20 +1,16 @@
-using backend.Model;
-using backend.Services;
-using shared;
 using shared.Model;
 
-public class TicketingRepository : ITicketingRepository
-{
-    private readonly TicketingContext _context;
+namespace backend.Services;
 
-    public TicketingRepository(TicketingContext context)
-    {
-        _context = context;
-    }
+public class TicketingInMemoryService : ITicketingRepository
+{
+    private static List<Concert> _concerts = new();
+    private static List<Reservation> _reservations = new();
 
     public Task<Concert> AddConcert(Concert concert)
     {
-        throw new NotImplementedException();
+        _concerts.Add(concert);
+        return Task.FromResult(concert);
     }
 
     public Task<Reservation> AddReservation(Reservation reservation)
@@ -24,7 +20,12 @@ public class TicketingRepository : ITicketingRepository
 
     public Task<Concert> DeleteConcert(int id)
     {
-        throw new NotImplementedException();
+        Concert? c = _concerts.Where(c => c.Id == id).FirstOrDefault();
+        if (c != null)
+        {
+            _concerts.Remove(c);
+        }
+        return Task.FromResult(c);
     }
 
     public Task<Reservation> DeleteReservation(int id)
@@ -34,7 +35,7 @@ public class TicketingRepository : ITicketingRepository
 
     public Task<IEnumerable<Concert>> GetAllConcerts()
     {
-        throw new NotImplementedException();
+        return Task.FromResult(_concerts.AsEnumerable());
     }
 
     public Task<IEnumerable<Reservation>> GetAllReservations()
@@ -44,7 +45,7 @@ public class TicketingRepository : ITicketingRepository
 
     public Task<Concert> GetConcertById(int id)
     {
-        throw new NotImplementedException();
+        return Task.FromResult(_concerts.Where(c => c.Id == id).FirstOrDefault());
     }
 
     public Task<Reservation> GetReservationById(int id)

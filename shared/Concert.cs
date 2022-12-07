@@ -1,5 +1,5 @@
 using System;
-namespace shared;
+namespace shared.Model;
 public class Concert
 {
     public int Id { get; set; }

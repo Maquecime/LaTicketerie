@@ -1,7 +1,9 @@
 
 using Microsoft.EntityFrameworkCore;
 using shared;
+using shared.Model;
 
+namespace backend.Model;
 public class TicketingContext : DbContext
 {
     public DbSet<Concert> Concerts { get; set; }

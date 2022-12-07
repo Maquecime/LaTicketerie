@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace shared;
+namespace shared.Model;
 public class Reservation
 {
     public int Id { get; set; }
