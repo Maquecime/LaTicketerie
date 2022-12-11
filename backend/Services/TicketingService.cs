@@ -1,3 +1,4 @@
+using backend.Converters;
 using Grpc.Core;
 using shared.Protos;
 
@@ -14,11 +15,7 @@ namespace backend.Services
 
         public async override Task<shared.Protos.Concert> AddConcert(Concert request, ServerCallContext context)
         {
-            var concert = new shared.Model.Concert()
-            {
-                Date = DateTime.Parse(request.Date),
-                Name = request.Name
-            };
+            var concert = backend.Converters.ModelToGrpcConverter.ConcertGrpcToModel(request);
 
             await _repo.AddConcert(concert);
             return request;

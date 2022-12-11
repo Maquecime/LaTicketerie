@@ -12,53 +12,83 @@ public class TicketingRepository : ITicketingRepository
         _context = context;
     }
 
-    public Task<Concert> AddConcert(Concert concert)
+    public async Task<Concert> AddConcert(Concert concert)
     {
-        throw new NotImplementedException();
+        _context.Concerts.Add(concert);
+        await _context.SaveChangesAsync();
+        return concert;
     }
 
-    public Task<Reservation> AddReservation(Reservation reservation)
+    public async Task<Reservation> AddReservation(Reservation reservation)
     {
-        throw new NotImplementedException();
+        _context.Reservations.Add(reservation);
+        await _context.SaveChangesAsync();
+        return reservation;
     }
 
-    public Task<Concert> DeleteConcert(int id)
+    public async Task<Concert> DeleteConcert(int id)
     {
-        throw new NotImplementedException();
+        Concert? c = await _context.Concerts.FindAsync(id);
+        if (c != null)
+        {
+            _context.Concerts.Remove(c);
+            await _context.SaveChangesAsync();
+        }
+        return c;
     }
 
-    public Task<Reservation> DeleteReservation(int id)
+    public async Task<Reservation> DeleteReservation(int id)
     {
-        throw new NotImplementedException();
+        Reservation? r = await _context.Reservations.FindAsync(id);
+        if (r != null)
+        {
+            _context.Reservations.Remove(r);
+            await _context.SaveChangesAsync();
+        }
+        return r;
     }
 
-    public Task<IEnumerable<Concert>> GetAllConcerts()
+    public async Task<IEnumerable<Concert>> GetAllConcerts()
     {
-        throw new NotImplementedException();
+        return _context.Concerts.ToList();
     }
 
-    public Task<IEnumerable<Reservation>> GetAllReservations()
+    public async Task<IEnumerable<Reservation>> GetAllReservations()
     {
-        throw new NotImplementedException();
+        return _context.Reservations.ToList();
     }
 
-    public Task<Concert> GetConcertById(int id)
+    public async Task<Concert> GetConcertById(int id)
     {
-        throw new NotImplementedException();
+        return _context.Concerts.Where(c => c.Id == id).FirstOrDefault();
     }
 
-    public Task<Reservation> GetReservationById(int id)
+    public async Task<Reservation> GetReservationById(int id)
     {
-        throw new NotImplementedException();
+        return _context.Reservations.Where(r => r.Id == id).FirstOrDefault();
     }
 
-    public Task<Concert> UpdateConcert(Concert concert)
+    public async Task<Concert> UpdateConcert(Concert concert)
     {
-        throw new NotImplementedException();
+        Concert? c = await _context.Concerts.FindAsync(concert.Id);
+        if (c != null)
+        {
+            _context.Concerts.Update(c);
+        }
+
+        await _context.SaveChangesAsync();
+        return c;
     }
 
-    public Task<Reservation> UpdateReservation(Reservation reservation)
+    public async Task<Reservation> UpdateReservation(Reservation reservation)
     {
-        throw new NotImplementedException();
+        Reservation? r = await _context.Reservations.FindAsync(reservation.Id);
+        if (r != null)
+        {
+            _context.Reservations.Update(r);
+        }
+
+        await _context.SaveChangesAsync();
+        return r;
     }
 }
