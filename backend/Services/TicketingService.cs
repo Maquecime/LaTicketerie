@@ -21,44 +21,63 @@ namespace backend.Services
             return request;
         }
 
-        public override Task<shared.Protos.Reservation> AddReservation(shared.Protos.Reservation request, ServerCallContext context)
+        public override async Task<shared.Protos.Reservation> AddReservation(shared.Protos.Reservation request, ServerCallContext context)
         {
-            throw new NotImplementedException();
+            var reservation = ModelToGrpcConverter.ReservationGrpcToModel(request);
+            await _repo.AddReservation(reservation);
+            return request;
         }
 
-        public override Task<shared.Protos.Concert> DeleteConcert(shared.Protos.ConcertId request, ServerCallContext context)
+        public override async Task<shared.Protos.Concert> DeleteConcert(shared.Protos.ConcertId request, ServerCallContext context)
         {
-            throw new NotImplementedException();
+            var concert = await _repo.GetConcertById(request.Id);
+            var grpcConcert = ModelToGrpcConverter.ConcertModelToGrpc(concert);
+            await _repo.DeleteConcert(concert.Id);
+            return grpcConcert;
         }
 
-        public override Task<shared.Protos.Reservation> DeleteReservation(shared.Protos.ReservationId request, ServerCallContext context)
+        public override async Task<shared.Protos.Reservation> DeleteReservation(shared.Protos.ReservationId request, ServerCallContext context)
         {
-            throw new NotImplementedException();
+            var reserv = await _repo.GetReservationById(request.Id);
+            var grpcReserv = ModelToGrpcConverter.ReservationModelToGrpc(reserv);
+            await _repo.DeleteReservation(reserv.Id);
+            return grpcReserv;
         }
 
-        public override bool Equals(object? obj)
+        public override async Task<shared.Protos.Concerts> GetAllConcerts(shared.Protos.GetAllConcertsRequest request, ServerCallContext context)
         {
-            throw new NotImplementedException();
+            var concerts = await _repo.GetAllConcerts();
+            Concerts c = new();
+            foreach (shared.Model.Concert concert in concerts)
+            {
+                c.Concert.Add(ModelToGrpcConverter.ConcertModelToGrpc(concert));
+            }
+            return c;
         }
 
-        public override Task<shared.Protos.Concerts> GetAllConcerts(shared.Protos.GetAllConcertsRequest request, ServerCallContext context)
+        public override async Task<shared.Protos.Reservations> GetAllReservations(shared.Protos.GetAllReservationsRequest request, ServerCallContext context)
         {
-            throw new NotImplementedException();
+            var reservs = await _repo.GetAllReservations();
+            Reservations r = new();
+            foreach (shared.Model.Reservation reservation in reservs)
+            {
+                r.Reservation.Add(ModelToGrpcConverter.ReservationModelToGrpc(reservation));
+            }
+            return r;
         }
 
-        public override Task<shared.Protos.Reservations> GetAllReservations(shared.Protos.GetAllReservationsRequest request, ServerCallContext context)
+        public override async Task<shared.Protos.Concert> UpdateConcert(shared.Protos.Concert request, ServerCallContext context)
         {
-            throw new NotImplementedException();
+            var concert = ModelToGrpcConverter.ConcertGrpcToModel(request);
+            await _repo.UpdateConcert(concert);
+            return request;
         }
 
-        public override Task<shared.Protos.Concert> UpdateConcert(shared.Protos.Concert request, ServerCallContext context)
+        public override async Task<shared.Protos.Reservation> UpdateReservation(shared.Protos.Reservation request, ServerCallContext context)
         {
-            throw new NotImplementedException();
-        }
-
-        public override Task<shared.Protos.Reservation> UpdateReservation(shared.Protos.Reservation request, ServerCallContext context)
-        {
-            throw new NotImplementedException();
+            var reserv = ModelToGrpcConverter.ReservationGrpcToModel(request);
+            await _repo.UpdateReservation(reserv);
+            return request;
         }
     }
 }

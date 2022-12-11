@@ -34,7 +34,7 @@ public class ModelToGrpcConverter
         };
     }
 
-    public static shared.Model.Reservation ReservationModelToGrpc(shared.Protos.Reservation r)
+    public static shared.Model.Reservation ReservationGrpcToModel(shared.Protos.Reservation r)
     {
         return new shared.Model.Reservation()
         {
